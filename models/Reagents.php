@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "reagents".
@@ -22,6 +23,8 @@ use Yii;
  * @property boolean $reagent_type
  * @property boolean $liquid
  * @property string $description
+ *
+ * @property array $manufacturer_list
  *
  * @property Classification $classification
  * @property Concentration $concentration
@@ -69,11 +72,16 @@ class Reagents extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
-            'reagent_id' => Yii::t('app', 'Reagent ID'),
-            'manufacturer_id' => Yii::t('app', 'Manufacturer ID'),
-            'classification_id' => Yii::t('app', 'Classification ID'),
-            'concentration_id' => Yii::t('app', 'Concentration ID'),
-            'method_id' => Yii::t('app', 'Method ID'),
+            'reagent_id' => Yii::t('app', 'Reagent'),
+            'reagents' => Yii::t('app', 'Reagents'),
+            'manufacturer_id' => Yii::t('app', 'Manufacturer'),
+            'manufacturer' => Yii::t('app', 'Manufacturer'),
+            'classification_id' => Yii::t('app', 'Classification'),
+            'classification' => Yii::t('app', 'Classification'),
+            'concentration_id' => Yii::t('app', 'Concentration'),
+            'concentration' => Yii::t('app', 'Concentration'),
+            'method_id' => Yii::t('app', 'Method'),
+            'method' => Yii::t('app', 'Method'),
             'create_date' => Yii::t('app', 'Create Date'),
             'amount' => Yii::t('app', 'Amount'),
             'formula' => Yii::t('app', 'Formula'),
@@ -93,12 +101,25 @@ class Reagents extends \yii\db\ActiveRecord
         return $this->hasOne(Classification::className(), ['id' => 'classification_id']);
     }
 
+    public function getClassification_list()
+    {
+        return ArrayHelper::map(Classification::find()->all(),'id','title');
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getConcentration()
     {
         return $this->hasOne(Concentration::className(), ['id' => 'concentration_id']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getConcentration_list()
+    {
+        return ArrayHelper::map(Concentration::find()->all(),'id','title');
     }
 
     /**
@@ -110,6 +131,15 @@ class Reagents extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function getManufacturer_list()
+    {
+        return ArrayHelper::map(Manufacturer::find()->all(),'id','title');
+    }
+
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getMethod()
@@ -118,11 +148,24 @@ class Reagents extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return array
+     */
+    public function getMethod_list()
+    {
+        return ArrayHelper::map(Method::find()->all(),'id','name');
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getReagent()
     {
         return $this->hasOne(ReagentsToReagents::className(), ['id' => 'reagent_id']);
+    }
+
+    public function getReagent_list()
+    {
+        return ArrayHelper::map(Reagents::find()->all(),'id', 'name');
     }
 
     /**
