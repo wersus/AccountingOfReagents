@@ -21,10 +21,10 @@ return [
     'Create Concentration' => 'Создать концентрацию',
     'Update Concentration:' => 'Изменить концентрацию',
 
-    'Method' => 'Метод',
-    'Create Method' => 'Создать метод',
-    'Methods' => 'Методы',
-    'Update Method:' => '',
+    'Method' => 'Методика',
+    'Create Method' => 'Создать методику',
+    'Methods' => 'Методики',
+    'Update Method:' => 'Измнеить методику',
 
     'Reagents' => 'Реактивы',
     'Reagent' => 'Ректив',
@@ -35,7 +35,7 @@ return [
     'Title' => 'Название',
     'ID' => 'id',
     'Short Title' => 'Сокращёное название',
-    'Name' => 'Имя',
+    'Name' => 'Наименование',
     'Number' => 'Номер',
 
     'Create Date' => 'Дата создания',
