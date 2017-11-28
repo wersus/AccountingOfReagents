@@ -178,11 +178,11 @@ class Reagents extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\models\ReagentsQuery the active query used by this AR class.
+//     * @return \app\models\ReagentsQuery the active query used by this AR class.
      */
     public static function find()
     {
-        $query = new \app\models\ReagentsQuery(get_called_class());
-        return $query->where(['reagents.deleted_by' => 0]);
+        //$query = new \app\models\ReagentsQuery(get_called_class());
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

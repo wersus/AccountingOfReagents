@@ -9,12 +9,6 @@ namespace app\models;
  */
 class ReagentsQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
-    {
-        $this->andWhere('[[status]]=1');
-        return $this;
-    }*/
-
     /**
      * @inheritdoc
      * @return Reagents[]|array

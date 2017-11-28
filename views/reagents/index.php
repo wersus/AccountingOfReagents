@@ -31,9 +31,6 @@ $this->registerJs($search);
     <?php 
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'name:ntext',
         'formula:ntext',
         'short:ntext',
@@ -67,7 +64,7 @@ $this->registerJs($search);
                     'label' => 'Full',
                     'class' => 'btn btn-default',
                     'itemsBefore' => [
-                        '<li class="dropdown-header">Export All Data</li>',
+                        '<li class="dropdown-header">'.Yii::t('app', 'Export All Data').'</li>',
                     ],
                 ],
             ]) ,
