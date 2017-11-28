@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host=localhost;port=5432;dbname=accounting_of_reagents',
+    'dsn' => 'pgsql:host=localhost;port=5432;dbname=reagents',
     'username' => 'wers',
     'password' => '123',
     'charset' => 'utf8',

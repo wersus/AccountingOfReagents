@@ -9,7 +9,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'language' => 'ru-RU',
     'sourceLanguage' => 'en-US',
@@ -66,6 +66,13 @@ $config = [
         ],
     ],
     'params' => $params,
+    'modules' => [
+        'gridview' => [
+            'class' => '\kartik\grid\Module',
+        ],
+        'datecontrol' => [
+            'class' => '\kartik\datecontrol\Module',
+        ],]
 ];
 
 if (YII_ENV_DEV) {
