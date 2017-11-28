@@ -25,7 +25,8 @@
         "2amigos/yii2-multi-select-widget": "~1.0",
         "2amigos/yii2-select2-widget":"~1.0",
         "mootensai/yii2-enhanced-gii": "dev-master",
-        "kartik-v/yii2-mpdf": "1.0"
+        "kartik-v/yii2-mpdf": "1.0",
+        "kartik-v/yii2-datecontrol": "^1.9"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
