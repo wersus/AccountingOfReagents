@@ -28,7 +28,7 @@ class ExternalReagentsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'add-act-of-renewal-reagents', 'add-write-offs'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'pdf', 'add-act-of-renewal-reagents', 'add-write-offs'],
                         'roles' => ['@']
                     ],
                     [
@@ -123,6 +123,45 @@ class ExternalReagentsController extends Controller
         $this->findModel($id)->deleteWithRelated();
 
         return $this->redirect(['index']);
+    }
+    
+    /**
+     * 
+     * Export ExternalReagents information into PDF format.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPdf($id) {
+        $model = $this->findModel($id);
+        $providerActOfRenewalReagents = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->actOfRenewalReagents,
+        ]);
+        $providerWriteOffs = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->writeOffs,
+        ]);
+
+        $content = $this->renderAjax('_pdf', [
+            'model' => $model,
+            'providerActOfRenewalReagents' => $providerActOfRenewalReagents,
+            'providerWriteOffs' => $providerWriteOffs,
+        ]);
+
+        $pdf = new \kartik\mpdf\Pdf([
+            'mode' => \kartik\mpdf\Pdf::MODE_CORE,
+            'format' => \kartik\mpdf\Pdf::FORMAT_A4,
+            'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
+            'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
+            'content' => $content,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            'options' => ['title' => \Yii::$app->name],
+            'methods' => [
+                'SetHeader' => [\Yii::$app->name],
+                'SetFooter' => ['{PAGENO}'],
+            ]
+        ]);
+
+        return $pdf->render();
     }
 
     

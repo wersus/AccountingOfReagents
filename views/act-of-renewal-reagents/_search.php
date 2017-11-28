@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id_external_reagents')->widget(\kartik\widgets\Select2::classname(), [
@@ -37,7 +41,7 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'date')->widget(\kartik\datecontrol\DateControl::classname(), [
+    <?php /* echo $form->field($model, 'date')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
         'saveFormat' => 'php:Y-m-d',
         'ajaxConversion' => true,
@@ -47,15 +51,15 @@ use yii\widgets\ActiveForm;
                 'autoclose' => true
             ]
         ],
-    ]); ?>
+    ]); */ ?>
 
-    <?= $form->field($model, 'id_shelf_lifes')->widget(\kartik\widgets\Select2::classname(), [
+    <?php /* echo $form->field($model, 'id_shelf_lifes')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\ShelfLifes::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Shelf lifes')],
         'pluginOptions' => [
             'allowClear' => true
         ],
-    ]); ?>
+    ]); */ ?>
 
     <?php /* echo $form->field($model, 'id_methods')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\Methods::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
@@ -67,7 +71,13 @@ use yii\widgets\ActiveForm;
 
     <?php /* echo $form->field($model, 'relative_error')->textInput(['placeholder' => 'Relative Error']) */ ?>
 
-    <?php /* echo $form->field($model, 'id_measurements')->textInput(['placeholder' => 'Id Measurements']) */ ?>
+    <?php /* echo $form->field($model, 'id_measurements')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Measurements::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Measurements')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); */ ?>
 
     <?php /* echo $form->field($model, 'conclusion')->textarea(['rows' => 6]) */ ?>
 

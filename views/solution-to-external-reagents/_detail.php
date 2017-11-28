@@ -19,6 +19,8 @@ use kartik\grid\GridView;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'solutions.name',
@@ -32,7 +34,10 @@ use kartik\grid\GridView;
             'attribute' => 'methods.name',
             'label' => Yii::t('app', 'Id Methods'),
         ],
-        'id_reagents',
+        [
+            'attribute' => 'reagents.name',
+            'label' => Yii::t('app', 'Id Reagents'),
+        ],
         'part',
     ];
     echo DetailView::widget([

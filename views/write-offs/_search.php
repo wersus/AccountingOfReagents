@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id_external_reagents')->widget(\kartik\widgets\Select2::classname(), [
@@ -25,11 +29,23 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id_internal_solutions')->textInput(['placeholder' => 'Id Internal Solutions']) ?>
+    <?= $form->field($model, 'id_internal_solutions')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Internal solutions')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
 
-    <?= $form->field($model, 'id_internal_solutions_two')->textInput(['placeholder' => 'Id Internal Solutions Two']) ?>
+    <?php /* echo $form->field($model, 'id_internal_solutions_two')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Internal solutions')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); */ ?>
 
-    <?= $form->field($model, 'volume')->textInput(['placeholder' => 'Volume']) ?>
+    <?php /* echo $form->field($model, 'volume')->textInput(['placeholder' => 'Volume']) */ ?>
 
     <?php /* echo $form->field($model, 'weight')->textInput(['placeholder' => 'Weight']) */ ?>
 

@@ -21,6 +21,8 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
+        'guid' => ['type' => TabularForm::INPUT_TEXT],
+        "lock" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         'id_solutions' => [
             'label' => 'Solutions',
@@ -42,7 +44,16 @@ echo TabularForm::widget([
             ],
             'columnOptions' => ['width' => '200px']
         ],
-        'id_reagents' => ['type' => TabularForm::INPUT_TEXT],
+        'id_reagents' => [
+            'label' => 'Reagents',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\Reagents::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose Reagents')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
         'part' => ['type' => TabularForm::INPUT_TEXT],
         'del' => [
             'type' => 'raw',

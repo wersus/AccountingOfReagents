@@ -9,7 +9,7 @@ $items = [
             'model' => $model,
         ]),
     ],
-        ];
+            ];
 echo TabsX::widget([
     'items' => $items,
     'position' => TabsX::POS_ABOVE,

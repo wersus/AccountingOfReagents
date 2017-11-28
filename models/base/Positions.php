@@ -10,10 +10,15 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "positions".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property string $name
- *
- * @property \app\models\Users[] $users
  */
 class Positions extends \yii\db\ActiveRecord
 {
@@ -41,7 +46,7 @@ class Positions extends \yii\db\ActiveRecord
     public function relationNames()
     {
         return [
-            'users'
+            ''
         ];
     }
 
@@ -51,7 +56,9 @@ class Positions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'string'],
+            [['guid', 'name'], 'string'],
+            [['deleted_by', 'updated_by', 'lock'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -82,19 +89,13 @@ class Positions extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
         ];
     }
-    
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsers()
-    {
-        return $this->hasMany(\app\models\Users::className(), ['id_positions' => 'id']);
-    }
-    
+
     /**
      * @inheritdoc
      * @return array mixed

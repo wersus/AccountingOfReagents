@@ -17,7 +17,9 @@ class SolutionToExternalReagents extends BaseSolutionToExternalReagents
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id_solutions', 'id_solutions_two', 'id_methods', 'id_reagents', 'part'], 'integer'],
+            [['guid'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_solutions', 'id_solutions_two', 'id_methods', 'id_reagents', 'part'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['id_methods'], 'required'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']

@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id_solutions')->widget(\kartik\widgets\Select2::classname(), [
@@ -41,7 +45,13 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id_reagents')->textInput(['placeholder' => 'Id Reagents']) ?>
+    <?= $form->field($model, 'id_reagents')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Reagents::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Reagents')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'part')->textInput(['placeholder' => 'Part']) ?>
 

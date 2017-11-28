@@ -19,6 +19,8 @@ use kartik\grid\GridView;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'externalReagents.id',
@@ -35,7 +37,10 @@ use kartik\grid\GridView;
             'label' => Yii::t('app', 'Id Methods'),
         ],
         'relative_error',
-        'id_measurements',
+        [
+            'attribute' => 'measurements.id',
+            'label' => Yii::t('app', 'Id Measurements'),
+        ],
         'conclusion:ntext',
     ];
     echo DetailView::widget([

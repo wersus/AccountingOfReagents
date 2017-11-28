@@ -17,7 +17,9 @@ class Qualifications extends BaseQualifications
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['name', 'short'], 'string'],
+            [['guid', 'name', 'short'], 'string'],
+            [['deleted_by', 'updated_by', 'lock'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

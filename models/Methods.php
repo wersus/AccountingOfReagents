@@ -17,7 +17,9 @@ class Methods extends BaseMethods
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['name', 'short', 'document', 'index'], 'string'],
+            [['guid', 'name', 'short', 'document', 'index'], 'string'],
+            [['deleted_by', 'updated_by', 'lock'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

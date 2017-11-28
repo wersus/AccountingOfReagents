@@ -8,6 +8,8 @@ use yii\data\ArrayDataProvider;
     ]);
     $gridColumns = [
         ['class' => 'yii\grid\SerialColumn'],
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
                 'attribute' => 'solutions.name',
@@ -17,7 +19,10 @@ use yii\data\ArrayDataProvider;
                 'attribute' => 'solutionsTwo.name',
                 'label' => Yii::t('app', 'Id Solutions Two')
             ],
-        'id_reagents',
+        [
+                'attribute' => 'reagents.name',
+                'label' => Yii::t('app', 'Id Reagents')
+            ],
         'part',
         [
             'class' => 'yii\grid\ActionColumn',

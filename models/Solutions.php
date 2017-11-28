@@ -17,8 +17,9 @@ class Solutions extends BaseSolutions
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id_shelf_lifes', 'id_concentrations'], 'integer'],
-            [['name'], 'string'],
+            [['guid', 'name'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_shelf_lifes', 'id_concentrations'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

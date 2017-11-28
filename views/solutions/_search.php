@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id_shelf_lifes')->widget(\kartik\widgets\Select2::classname(), [
@@ -27,13 +31,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'id_concentrations')->widget(\kartik\widgets\Select2::classname(), [
+    <?php /* echo $form->field($model, 'id_concentrations')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\Concentrations::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Concentrations')],
         'pluginOptions' => [
             'allowClear' => true
         ],
-    ]); ?>
+    ]); */ ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

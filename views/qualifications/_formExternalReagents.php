@@ -21,6 +21,8 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
+        'guid' => ['type' => TabularForm::INPUT_TEXT],
+        "lock" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         'id_manufacturers' => [
             'label' => 'Manufacturers',
@@ -46,7 +48,16 @@ echo TabularForm::widget([
                 ],
             ]
         ],
-        'id_reagents' => ['type' => TabularForm::INPUT_TEXT],
+        'id_reagents' => [
+            'label' => 'Reagents',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\Reagents::find()->orderBy('name')->asArray()->all(), 'id', 'name'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose Reagents')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
         'document' => ['type' => TabularForm::INPUT_TEXTAREA],
         'best_before' => ['type' => TabularForm::INPUT_WIDGET,
             'widgetClass' => \kartik\datecontrol\DateControl::classname(),

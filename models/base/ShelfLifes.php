@@ -10,6 +10,13 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "shelf_lifes".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property integer $value
  * @property string $short
@@ -56,8 +63,9 @@ class ShelfLifes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['value'], 'integer'],
-            [['short'], 'string'],
+            [['guid', 'short'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'value'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -88,6 +96,8 @@ class ShelfLifes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'value' => Yii::t('app', 'Value'),
             'short' => Yii::t('app', 'Short'),

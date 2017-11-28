@@ -43,6 +43,8 @@ $this->registerJs($search);
             'headerOptions' => ['class' => 'kartik-sheet-style'],
             'expandOneOnly' => true
         ],
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
                 'attribute' => 'id_external_reagents',
@@ -92,7 +94,22 @@ $this->registerJs($search);
                 'filterInputOptions' => ['placeholder' => 'Methods', 'id' => 'grid-act-of-renewal-reagents-search-id_methods']
             ],
         'relative_error',
-        'id_measurements',
+        [
+                'attribute' => 'id_measurements',
+                'label' => Yii::t('app', 'Id Measurements'),
+                'value' => function($model){
+                    if ($model->measurements)
+                    {return $model->measurements->id;}
+                    else
+                    {return NULL;}
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Measurements::find()->asArray()->all(), 'id', 'id'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Measurements', 'id' => 'grid-act-of-renewal-reagents-search-id_measurements']
+            ],
         'conclusion:ntext',
         [
             'class' => 'yii\grid\ActionColumn',
@@ -109,7 +126,6 @@ $this->registerJs($search);
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
         ],
-        'export' => false,
         // your toolbar can include the additional full export menu
         'toolbar' => [
             '{export}',
@@ -125,9 +141,6 @@ $this->registerJs($search);
                         '<li class="dropdown-header">Export All Data</li>',
                     ],
                 ],
-                'exportConfig' => [
-                    ExportMenu::FORMAT_PDF => false
-                ]
             ]) ,
         ],
     ]); ?>

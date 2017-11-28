@@ -9,6 +9,14 @@ use yii\widgets\ActiveForm;
 
 \mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
     'viewParams' => [
+        'class' => 'InternalSolutions', 
+        'relID' => 'internal-solutions', 
+        'value' => \yii\helpers\Json::encode($model->internalSolutions),
+        'isNewRecord' => ($model->isNewRecord) ? 1 : 0
+    ]
+]);
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+    'viewParams' => [
         'class' => 'SolutionToExternalReagents', 
         'relID' => 'solution-to-external-reagents', 
         'value' => \yii\helpers\Json::encode($model->solutionToExternalReagents),
@@ -22,6 +30,10 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->errorSummary($model); ?>
+
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
@@ -45,6 +57,12 @@ use yii\widgets\ActiveForm;
 
     <?php
     $forms = [
+        [
+            'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'InternalSolutions')),
+            'content' => $this->render('_formInternalSolutions', [
+                'row' => \yii\helpers\ArrayHelper::toArray($model->internalSolutions),
+            ]),
+        ],
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'SolutionToExternalReagents')),
             'content' => $this->render('_formSolutionToExternalReagents', [

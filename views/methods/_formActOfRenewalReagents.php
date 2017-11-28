@@ -21,6 +21,8 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
+        'guid' => ['type' => TabularForm::INPUT_TEXT],
+        "lock" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         'id_external_reagents' => [
             'label' => 'External reagents',
@@ -71,7 +73,16 @@ echo TabularForm::widget([
             'columnOptions' => ['width' => '200px']
         ],
         'relative_error' => ['type' => TabularForm::INPUT_TEXT],
-        'id_measurements' => ['type' => TabularForm::INPUT_TEXT],
+        'id_measurements' => [
+            'label' => 'Measurements',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\Measurements::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose Measurements')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
         'conclusion' => ['type' => TabularForm::INPUT_TEXTAREA],
         'del' => [
             'type' => 'raw',

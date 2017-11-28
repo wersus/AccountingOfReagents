@@ -17,8 +17,9 @@ class WriteOffs extends BaseWriteOffs
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id_external_reagents', 'id_internal_solutions', 'id_internal_solutions_two', 'volume', 'weight', 'id_users'], 'integer'],
-            [['reason'], 'string'],
+            [['guid', 'reason'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_external_reagents', 'id_internal_solutions', 'id_internal_solutions_two', 'volume', 'weight'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

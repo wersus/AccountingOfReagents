@@ -18,6 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'Methods').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
+<?=             
+             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
+                ['pdf', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
+                ]
+            )?>
             
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -34,6 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'name:ntext',
         'short:ntext',
@@ -52,6 +64,8 @@ $this->params['breadcrumbs'][] = $this->title;
 if($providerActOfRenewalReagents->totalCount){
     $gridColumnActOfRenewalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
             [
                 'attribute' => 'externalReagents.id',
@@ -64,7 +78,10 @@ if($providerActOfRenewalReagents->totalCount){
                 'label' => Yii::t('app', 'Id Shelf Lifes')
             ],
                         'relative_error',
-            'id_measurements',
+            [
+                'attribute' => 'measurements.id',
+                'label' => Yii::t('app', 'Id Measurements')
+            ],
             'conclusion:ntext',
     ];
     echo Gridview::widget([
@@ -75,7 +92,6 @@ if($providerActOfRenewalReagents->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Act Of Renewal Reagents')),
         ],
-        'export' => false,
         'columns' => $gridColumnActOfRenewalReagents
     ]);
 }
@@ -88,6 +104,8 @@ if($providerActOfRenewalReagents->totalCount){
 if($providerSolutionToExternalReagents->totalCount){
     $gridColumnSolutionToExternalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
             [
                 'attribute' => 'solutions.name',
@@ -97,7 +115,10 @@ if($providerSolutionToExternalReagents->totalCount){
                 'attribute' => 'solutionsTwo.name',
                 'label' => Yii::t('app', 'Id Solutions Two')
             ],
-                        'id_reagents',
+                        [
+                'attribute' => 'reagents.name',
+                'label' => Yii::t('app', 'Id Reagents')
+            ],
             'part',
     ];
     echo Gridview::widget([
@@ -108,7 +129,6 @@ if($providerSolutionToExternalReagents->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Solution To External Reagents')),
         ],
-        'export' => false,
         'columns' => $gridColumnSolutionToExternalReagents
     ]);
 }

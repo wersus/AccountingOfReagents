@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id_external_reagents')->widget(\kartik\widgets\Select2::classname(), [
@@ -67,7 +71,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'relative_error')->textInput(['placeholder' => 'Relative Error']) ?>
 
-    <?= $form->field($model, 'id_measurements')->textInput(['placeholder' => 'Id Measurements']) ?>
+    <?= $form->field($model, 'id_measurements')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Measurements::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Measurements')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'conclusion')->textarea(['rows' => 6]) ?>
 

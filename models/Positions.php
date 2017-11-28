@@ -17,7 +17,9 @@ class Positions extends BasePositions
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['name'], 'string'],
+            [['guid', 'name'], 'string'],
+            [['deleted_by', 'updated_by', 'lock'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

@@ -21,9 +21,29 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
+        'guid' => ['type' => TabularForm::INPUT_TEXT],
+        "lock" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
-        'id_internal_solutions' => ['type' => TabularForm::INPUT_TEXT],
-        'id_internal_solutions_two' => ['type' => TabularForm::INPUT_TEXT],
+        'id_internal_solutions' => [
+            'label' => 'Internal solutions',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose Internal solutions')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
+        'id_internal_solutions_two' => [
+            'label' => 'Internal solutions',
+            'type' => TabularForm::INPUT_WIDGET,
+            'widgetClass' => \kartik\widgets\Select2::className(),
+            'options' => [
+                'data' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+                'options' => ['placeholder' => Yii::t('app', 'Choose Internal solutions')],
+            ],
+            'columnOptions' => ['width' => '200px']
+        ],
         'volume' => ['type' => TabularForm::INPUT_TEXT],
         'weight' => ['type' => TabularForm::INPUT_TEXT],
         'reason' => ['type' => TabularForm::INPUT_TEXTAREA],

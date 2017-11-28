@@ -18,6 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'Act Of Renewal Reagents').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
+<?=             
+             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
+                ['pdf', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
+                ]
+            )?>
             
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -34,6 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'externalReagents.id',
@@ -50,7 +62,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => Yii::t('app', 'Id Methods'),
         ],
         'relative_error',
-        'id_measurements',
+        [
+            'attribute' => 'measurements.id',
+            'label' => Yii::t('app', 'Id Measurements'),
+        ],
         'conclusion:ntext',
     ];
     echo DetailView::widget([
@@ -64,6 +79,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php 
     $gridColumnExternalReagents = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'id_manufacturers',
         'create_date',
@@ -85,10 +102,29 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => $gridColumnExternalReagents    ]);
     ?>
     <div class="row">
+        <h4>Measurements<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnMeasurements = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
+        ['attribute' => 'id', 'visible' => false],
+        'date',
+        'mass_consentarion',
+        'Kk',
+        'control standard',
+    ];
+    echo DetailView::widget([
+        'model' => $model->measurements,
+        'attributes' => $gridColumnMeasurements    ]);
+    ?>
+    <div class="row">
         <h4>Methods<?= ' '. Html::encode($this->title) ?></h4>
     </div>
     <?php 
     $gridColumnMethods = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'name',
         'short',
@@ -104,6 +140,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php 
     $gridColumnShelfLifes = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'value',
         'short',
@@ -111,20 +149,5 @@ $this->params['breadcrumbs'][] = $this->title;
     echo DetailView::widget([
         'model' => $model->shelfLifes,
         'attributes' => $gridColumnShelfLifes    ]);
-    ?>
-    <div class="row">
-        <h4>Users<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnUsers = [
-        ['attribute' => 'id', 'visible' => false],
-        'surname',
-        'name',
-        'patronymic',
-        'id_positions',
-    ];
-    echo DetailView::widget([
-        'model' => $model->users,
-        'attributes' => $gridColumnUsers    ]);
     ?>
 </div>

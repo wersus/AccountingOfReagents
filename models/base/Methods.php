@@ -10,6 +10,13 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "methods".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property string $name
  * @property string $short
@@ -56,7 +63,9 @@ class Methods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'short', 'document', 'index'], 'string'],
+            [['guid', 'name', 'short', 'document', 'index'], 'string'],
+            [['deleted_by', 'updated_by', 'lock'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -87,6 +96,8 @@ class Methods extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
             'short' => Yii::t('app', 'Short'),

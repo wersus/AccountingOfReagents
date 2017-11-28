@@ -39,6 +39,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'value')->textInput(['placeholder' => 'Value']) ?>

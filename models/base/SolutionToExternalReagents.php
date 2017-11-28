@@ -10,6 +10,13 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "solution_to_external_reagents".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property integer $id_solutions
  * @property integer $id_solutions_two
@@ -18,6 +25,7 @@ use mootensai\behaviors\UUIDBehavior;
  * @property integer $part
  *
  * @property \app\models\Methods $methods
+ * @property \app\models\Reagents $reagents
  * @property \app\models\Solutions $solutions
  * @property \app\models\Solutions $solutionsTwo
  */
@@ -48,6 +56,7 @@ class SolutionToExternalReagents extends \yii\db\ActiveRecord
     {
         return [
             'methods',
+            'reagents',
             'solutions',
             'solutionsTwo'
         ];
@@ -59,7 +68,9 @@ class SolutionToExternalReagents extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_solutions', 'id_solutions_two', 'id_methods', 'id_reagents', 'part'], 'integer'],
+            [['guid'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_solutions', 'id_solutions_two', 'id_methods', 'id_reagents', 'part'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['id_methods'], 'required'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
@@ -91,6 +102,8 @@ class SolutionToExternalReagents extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'id_solutions' => Yii::t('app', 'Id Solutions'),
             'id_solutions_two' => Yii::t('app', 'Id Solutions Two'),
@@ -106,6 +119,14 @@ class SolutionToExternalReagents extends \yii\db\ActiveRecord
     public function getMethods()
     {
         return $this->hasOne(\app\models\Methods::className(), ['id' => 'id_methods']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReagents()
+    {
+        return $this->hasOne(\app\models\Reagents::className(), ['id' => 'id_reagents']);
     }
         
     /**

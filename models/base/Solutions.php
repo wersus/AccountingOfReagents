@@ -10,11 +10,19 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "solutions".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property integer $id_shelf_lifes
  * @property string $name
  * @property integer $id_concentrations
  *
+ * @property \app\models\InternalSolutions[] $internalSolutions
  * @property \app\models\SolutionToExternalReagents[] $solutionToExternalReagents
  * @property \app\models\Concentrations $concentrations
  * @property \app\models\ShelfLifes $shelfLifes
@@ -45,6 +53,7 @@ class Solutions extends \yii\db\ActiveRecord
     public function relationNames()
     {
         return [
+            'internalSolutions',
             'solutionToExternalReagents',
             'concentrations',
             'shelfLifes'
@@ -57,8 +66,9 @@ class Solutions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_shelf_lifes', 'id_concentrations'], 'integer'],
-            [['name'], 'string'],
+            [['guid', 'name'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_shelf_lifes', 'id_concentrations'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -89,6 +99,8 @@ class Solutions extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'id_shelf_lifes' => Yii::t('app', 'Id Shelf Lifes'),
             'name' => Yii::t('app', 'Name'),
@@ -96,6 +108,14 @@ class Solutions extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInternalSolutions()
+    {
+        return $this->hasMany(\app\models\InternalSolutions::className(), ['id_solutions' => 'id']);
+    }
+        
     /**
      * @return \yii\db\ActiveQuery
      */

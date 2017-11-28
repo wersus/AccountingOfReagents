@@ -10,6 +10,13 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "write_offs".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property integer $id_external_reagents
  * @property integer $id_internal_solutions
@@ -17,10 +24,10 @@ use mootensai\behaviors\UUIDBehavior;
  * @property integer $volume
  * @property integer $weight
  * @property string $reason
- * @property integer $id_users
  *
  * @property \app\models\ExternalReagents $externalReagents
- * @property \app\models\Users $users
+ * @property \app\models\InternalSolutions $internalSolutions
+ * @property \app\models\InternalSolutions $internalSolutionsTwo
  */
 class WriteOffs extends \yii\db\ActiveRecord
 {
@@ -49,7 +56,8 @@ class WriteOffs extends \yii\db\ActiveRecord
     {
         return [
             'externalReagents',
-            'users'
+            'internalSolutions',
+            'internalSolutionsTwo'
         ];
     }
 
@@ -59,8 +67,9 @@ class WriteOffs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_external_reagents', 'id_internal_solutions', 'id_internal_solutions_two', 'volume', 'weight', 'id_users'], 'integer'],
-            [['reason'], 'string'],
+            [['guid', 'reason'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_external_reagents', 'id_internal_solutions', 'id_internal_solutions_two', 'volume', 'weight'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -91,6 +100,8 @@ class WriteOffs extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'id_external_reagents' => Yii::t('app', 'Id External Reagents'),
             'id_internal_solutions' => Yii::t('app', 'Id Internal Solutions'),
@@ -98,7 +109,6 @@ class WriteOffs extends \yii\db\ActiveRecord
             'volume' => Yii::t('app', 'Volume'),
             'weight' => Yii::t('app', 'Weight'),
             'reason' => Yii::t('app', 'Reason'),
-            'id_users' => Yii::t('app', 'Id Users'),
         ];
     }
     
@@ -113,9 +123,17 @@ class WriteOffs extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsers()
+    public function getInternalSolutions()
     {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'id_users']);
+        return $this->hasOne(\app\models\InternalSolutions::className(), ['id' => 'id_internal_solutions']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInternalSolutionsTwo()
+    {
+        return $this->hasOne(\app\models\InternalSolutions::className(), ['id' => 'id_internal_solutions_two']);
     }
     
     /**

@@ -19,6 +19,8 @@ use kartik\grid\GridView;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'name:ntext',
         'short:ntext',

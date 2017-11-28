@@ -10,6 +10,13 @@ $items = [
         ]),
     ],
         [
+        'label' => '<i class="glyphicon glyphicon-book"></i> '. Html::encode(Yii::t('app', 'Internal Solutions')),
+        'content' => $this->render('_dataInternalSolutions', [
+            'model' => $model,
+            'row' => $model->internalSolutions,
+        ]),
+    ],
+            [
         'label' => '<i class="glyphicon glyphicon-book"></i> '. Html::encode(Yii::t('app', 'Solution To External Reagents')),
         'content' => $this->render('_dataSolutionToExternalReagents', [
             'model' => $model,

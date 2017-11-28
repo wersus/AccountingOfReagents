@@ -43,6 +43,8 @@ $this->registerJs($search);
             'headerOptions' => ['class' => 'kartik-sheet-style'],
             'expandOneOnly' => true
         ],
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
                 'attribute' => 'id_external_reagents',
@@ -60,8 +62,38 @@ $this->registerJs($search);
                 ],
                 'filterInputOptions' => ['placeholder' => 'External reagents', 'id' => 'grid-write-offs-search-id_external_reagents']
             ],
-        'id_internal_solutions',
-        'id_internal_solutions_two',
+        [
+                'attribute' => 'id_internal_solutions',
+                'label' => Yii::t('app', 'Id Internal Solutions'),
+                'value' => function($model){
+                    if ($model->internalSolutions)
+                    {return $model->internalSolutions->id;}
+                    else
+                    {return NULL;}
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->asArray()->all(), 'id', 'id'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Internal solutions', 'id' => 'grid-write-offs-search-id_internal_solutions']
+            ],
+        [
+                'attribute' => 'id_internal_solutions_two',
+                'label' => Yii::t('app', 'Id Internal Solutions Two'),
+                'value' => function($model){
+                    if ($model->internalSolutionsTwo)
+                    {return $model->internalSolutionsTwo->id;}
+                    else
+                    {return NULL;}
+                },
+                'filterType' => GridView::FILTER_SELECT2,
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->asArray()->all(), 'id', 'id'),
+                'filterWidgetOptions' => [
+                    'pluginOptions' => ['allowClear' => true],
+                ],
+                'filterInputOptions' => ['placeholder' => 'Internal solutions', 'id' => 'grid-write-offs-search-id_internal_solutions_two']
+            ],
         'volume',
         'weight',
         'reason:ntext',
@@ -80,7 +112,6 @@ $this->registerJs($search);
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
         ],
-        'export' => false,
         // your toolbar can include the additional full export menu
         'toolbar' => [
             '{export}',
@@ -96,9 +127,6 @@ $this->registerJs($search);
                         '<li class="dropdown-header">Export All Data</li>',
                     ],
                 ],
-                'exportConfig' => [
-                    ExportMenu::FORMAT_PDF => false
-                ]
             ]) ,
         ],
     ]); ?>

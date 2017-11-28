@@ -18,6 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'Shelf Lifes').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
+<?=             
+             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
+                ['pdf', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
+                ]
+            )?>
             
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -34,6 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'value',
         'short:ntext',
@@ -50,6 +62,8 @@ $this->params['breadcrumbs'][] = $this->title;
 if($providerActOfRenewalReagents->totalCount){
     $gridColumnActOfRenewalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
             [
                 'attribute' => 'externalReagents.id',
@@ -62,7 +76,10 @@ if($providerActOfRenewalReagents->totalCount){
                 'label' => Yii::t('app', 'Id Methods')
             ],
             'relative_error',
-            'id_measurements',
+            [
+                'attribute' => 'measurements.id',
+                'label' => Yii::t('app', 'Id Measurements')
+            ],
             'conclusion:ntext',
     ];
     echo Gridview::widget([
@@ -73,7 +90,6 @@ if($providerActOfRenewalReagents->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Act Of Renewal Reagents')),
         ],
-        'export' => false,
         'columns' => $gridColumnActOfRenewalReagents
     ]);
 }
@@ -86,13 +102,18 @@ if($providerActOfRenewalReagents->totalCount){
 if($providerExternalReagents->totalCount){
     $gridColumnExternalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
             [
                 'attribute' => 'manufacturers.name',
                 'label' => Yii::t('app', 'Id Manufacturers')
             ],
             'create_date',
-            'id_reagents',
+            [
+                'attribute' => 'reagents.name',
+                'label' => Yii::t('app', 'Id Reagents')
+            ],
             'document:ntext',
             'best_before',
             'batch',
@@ -112,7 +133,6 @@ if($providerExternalReagents->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'External Reagents')),
         ],
-        'export' => false,
         'columns' => $gridColumnExternalReagents
     ]);
 }
@@ -125,6 +145,8 @@ if($providerExternalReagents->totalCount){
 if($providerSolutions->totalCount){
     $gridColumnSolutions = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
                         'name:ntext',
             [
@@ -140,7 +162,6 @@ if($providerSolutions->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Solutions')),
         ],
-        'export' => false,
         'columns' => $gridColumnSolutions
     ]);
 }

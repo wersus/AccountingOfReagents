@@ -18,6 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'External Reagents').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
+<?=             
+             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
+                ['pdf', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
+                ]
+            )?>
             
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -34,13 +44,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'manufacturers.name',
             'label' => Yii::t('app', 'Id Manufacturers'),
         ],
         'create_date',
-        'id_reagents',
+        [
+            'attribute' => 'reagents.name',
+            'label' => Yii::t('app', 'Id Reagents'),
+        ],
         'document:ntext',
         'best_before',
         'batch',
@@ -68,6 +83,8 @@ $this->params['breadcrumbs'][] = $this->title;
 if($providerActOfRenewalReagents->totalCount){
     $gridColumnActOfRenewalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
                         'best_before',
             'date',
@@ -80,7 +97,10 @@ if($providerActOfRenewalReagents->totalCount){
                 'label' => Yii::t('app', 'Id Methods')
             ],
             'relative_error',
-            'id_measurements',
+            [
+                'attribute' => 'measurements.id',
+                'label' => Yii::t('app', 'Id Measurements')
+            ],
             'conclusion:ntext',
     ];
     echo Gridview::widget([
@@ -91,7 +111,6 @@ if($providerActOfRenewalReagents->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Act Of Renewal Reagents')),
         ],
-        'export' => false,
         'columns' => $gridColumnActOfRenewalReagents
     ]);
 }
@@ -116,6 +135,8 @@ if($providerActOfRenewalReagents->totalCount){
     </div>
     <?php 
     $gridColumnQualifications = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'name',
         'short',
@@ -125,10 +146,31 @@ if($providerActOfRenewalReagents->totalCount){
         'attributes' => $gridColumnQualifications    ]);
     ?>
     <div class="row">
+        <h4>Reagents<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnReagents = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
+        ['attribute' => 'id', 'visible' => false],
+        'name',
+        'formula',
+        'short',
+        'liquid',
+        'density',
+        'short_formula',
+    ];
+    echo DetailView::widget([
+        'model' => $model->reagents,
+        'attributes' => $gridColumnReagents    ]);
+    ?>
+    <div class="row">
         <h4>ShelfLifes<?= ' '. Html::encode($this->title) ?></h4>
     </div>
     <?php 
     $gridColumnShelfLifes = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'value',
         'short',
@@ -137,30 +179,23 @@ if($providerActOfRenewalReagents->totalCount){
         'model' => $model->shelfLifes,
         'attributes' => $gridColumnShelfLifes    ]);
     ?>
-    <div class="row">
-        <h4>Users<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnUsers = [
-        ['attribute' => 'id', 'visible' => false],
-        'surname',
-        'name',
-        'patronymic',
-        'id_positions',
-    ];
-    echo DetailView::widget([
-        'model' => $model->users,
-        'attributes' => $gridColumnUsers    ]);
-    ?>
     
     <div class="row">
 <?php
 if($providerWriteOffs->totalCount){
     $gridColumnWriteOffs = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
-                        'id_internal_solutions',
-            'id_internal_solutions_two',
+                        [
+                'attribute' => 'internalSolutions.id',
+                'label' => Yii::t('app', 'Id Internal Solutions')
+            ],
+            [
+                'attribute' => 'internalSolutionsTwo.id',
+                'label' => Yii::t('app', 'Id Internal Solutions Two')
+            ],
             'volume',
             'weight',
             'reason:ntext',
@@ -173,7 +208,6 @@ if($providerWriteOffs->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Write Offs')),
         ],
-        'export' => false,
         'columns' => $gridColumnWriteOffs
     ]);
 }

@@ -18,6 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'Manufacturers').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
+<?=             
+             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
+                ['pdf', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
+                ]
+            )?>
             
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -50,9 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
 if($providerExternalReagents->totalCount){
     $gridColumnExternalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
+            'guid',
+            ['attribute' => 'lock', 'visible' => false],
             ['attribute' => 'id', 'visible' => false],
                         'create_date',
-            'id_reagents',
+            [
+                'attribute' => 'reagents.name',
+                'label' => Yii::t('app', 'Id Reagents')
+            ],
             'document:ntext',
             'best_before',
             'batch',
@@ -76,7 +91,6 @@ if($providerExternalReagents->totalCount){
             'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'External Reagents')),
         ],
-        'export' => false,
         'columns' => $gridColumnExternalReagents
     ]);
 }

@@ -15,15 +15,19 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'short')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'document')->textarea(['rows' => 6]) ?>
+    <?php /* echo $form->field($model, 'document')->textarea(['rows' => 6]) */ ?>
 
-    <?= $form->field($model, 'index')->textarea(['rows' => 6]) ?>
+    <?php /* echo $form->field($model, 'index')->textarea(['rows' => 6]) */ ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

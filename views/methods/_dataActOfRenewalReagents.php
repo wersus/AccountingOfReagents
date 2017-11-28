@@ -8,6 +8,8 @@ use yii\data\ArrayDataProvider;
     ]);
     $gridColumns = [
         ['class' => 'yii\grid\SerialColumn'],
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
                 'attribute' => 'externalReagents.id',
@@ -20,7 +22,10 @@ use yii\data\ArrayDataProvider;
                 'label' => Yii::t('app', 'Id Shelf Lifes')
             ],
         'relative_error',
-        'id_measurements',
+        [
+                'attribute' => 'measurements.id',
+                'label' => Yii::t('app', 'Id Measurements')
+            ],
         'conclusion:ntext',
         [
             'class' => 'yii\grid\ActionColumn',

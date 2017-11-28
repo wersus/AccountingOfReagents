@@ -17,8 +17,9 @@ class ShelfLifes extends BaseShelfLifes
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['value'], 'integer'],
-            [['short'], 'string'],
+            [['guid', 'short'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'value'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

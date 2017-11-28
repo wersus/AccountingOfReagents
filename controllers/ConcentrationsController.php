@@ -28,7 +28,7 @@ class ConcentrationsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'add-solutions'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'pdf', 'add-solutions'],
                         'roles' => ['@']
                     ],
                     [
@@ -119,6 +119,41 @@ class ConcentrationsController extends Controller
         $this->findModel($id)->deleteWithRelated();
 
         return $this->redirect(['index']);
+    }
+    
+    /**
+     * 
+     * Export Concentrations information into PDF format.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPdf($id) {
+        $model = $this->findModel($id);
+        $providerSolutions = new \yii\data\ArrayDataProvider([
+            'allModels' => $model->solutions,
+        ]);
+
+        $content = $this->renderAjax('_pdf', [
+            'model' => $model,
+            'providerSolutions' => $providerSolutions,
+        ]);
+
+        $pdf = new \kartik\mpdf\Pdf([
+            'mode' => \kartik\mpdf\Pdf::MODE_CORE,
+            'format' => \kartik\mpdf\Pdf::FORMAT_A4,
+            'orientation' => \kartik\mpdf\Pdf::ORIENT_PORTRAIT,
+            'destination' => \kartik\mpdf\Pdf::DEST_BROWSER,
+            'content' => $content,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            'cssInline' => '.kv-heading-1{font-size:18px}',
+            'options' => ['title' => \Yii::$app->name],
+            'methods' => [
+                'SetHeader' => [\Yii::$app->name],
+                'SetFooter' => ['{PAGENO}'],
+            ]
+        ]);
+
+        return $pdf->render();
     }
 
     

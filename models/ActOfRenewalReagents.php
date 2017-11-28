@@ -17,10 +17,10 @@ class ActOfRenewalReagents extends BaseActOfRenewalReagents
     {
         return array_replace_recursive(parent::rules(),
 	    [
-            [['id_external_reagents', 'id_shelf_lifes', 'id_methods', 'relative_error', 'id_users', 'id_measurements'], 'integer'],
-            [['best_before', 'date'], 'safe'],
+            [['guid', 'conclusion'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_external_reagents', 'id_shelf_lifes', 'id_methods', 'relative_error', 'id_measurements'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at', 'best_before', 'date'], 'safe'],
             [['id_methods'], 'required'],
-            [['conclusion'], 'string'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

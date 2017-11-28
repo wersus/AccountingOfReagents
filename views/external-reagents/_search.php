@@ -15,6 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+
+    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+
     <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
 
     <?= $form->field($model, 'id_manufacturers')->widget(\kartik\widgets\Select2::classname(), [
@@ -37,9 +41,15 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id_reagents')->textInput(['placeholder' => 'Id Reagents']) ?>
+    <?php /* echo $form->field($model, 'id_reagents')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Reagents::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose Reagents')],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); */ ?>
 
-    <?= $form->field($model, 'document')->textarea(['rows' => 6]) ?>
+    <?php /* echo $form->field($model, 'document')->textarea(['rows' => 6]) */ ?>
 
     <?php /* echo $form->field($model, 'best_before')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,

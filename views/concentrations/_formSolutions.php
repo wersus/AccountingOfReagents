@@ -21,6 +21,8 @@ echo TabularForm::widget([
         'type' => TabularForm::INPUT_TEXT,
     ],
     'attributes' => [
+        'guid' => ['type' => TabularForm::INPUT_TEXT],
+        "lock" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         "id" => ['type' => TabularForm::INPUT_HIDDEN, 'columnOptions' => ['hidden'=>true]],
         'id_shelf_lifes' => [
             'label' => 'Shelf lifes',

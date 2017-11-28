@@ -10,6 +10,13 @@ use mootensai\behaviors\UUIDBehavior;
 /**
  * This is the base model class for table "act_of_renewal_reagents".
  *
+ * @property string $guid
+ * @property integer $deleted_by
+ * @property integer $updated_by
+ * @property integer $lock
+ * @property string $created_at
+ * @property string $updated_at
+ * @property string $deleted_at
  * @property integer $id
  * @property integer $id_external_reagents
  * @property string $best_before
@@ -17,14 +24,13 @@ use mootensai\behaviors\UUIDBehavior;
  * @property integer $id_shelf_lifes
  * @property integer $id_methods
  * @property integer $relative_error
- * @property integer $id_users
  * @property integer $id_measurements
  * @property string $conclusion
  *
  * @property \app\models\ExternalReagents $externalReagents
+ * @property \app\models\Measurements $measurements
  * @property \app\models\Methods $methods
  * @property \app\models\ShelfLifes $shelfLifes
- * @property \app\models\Users $users
  */
 class ActOfRenewalReagents extends \yii\db\ActiveRecord
 {
@@ -53,9 +59,9 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
     {
         return [
             'externalReagents',
+            'measurements',
             'methods',
-            'shelfLifes',
-            'users'
+            'shelfLifes'
         ];
     }
 
@@ -65,10 +71,10 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_external_reagents', 'id_shelf_lifes', 'id_methods', 'relative_error', 'id_users', 'id_measurements'], 'integer'],
-            [['best_before', 'date'], 'safe'],
+            [['guid', 'conclusion'], 'string'],
+            [['deleted_by', 'updated_by', 'lock', 'id_external_reagents', 'id_shelf_lifes', 'id_methods', 'relative_error', 'id_measurements'], 'integer'],
+            [['created_at', 'updated_at', 'deleted_at', 'best_before', 'date'], 'safe'],
             [['id_methods'], 'required'],
-            [['conclusion'], 'string'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -99,6 +105,8 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'guid' => Yii::t('app', 'Guid'),
+            'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'id_external_reagents' => Yii::t('app', 'Id External Reagents'),
             'best_before' => Yii::t('app', 'Best Before'),
@@ -106,7 +114,6 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
             'id_shelf_lifes' => Yii::t('app', 'Id Shelf Lifes'),
             'id_methods' => Yii::t('app', 'Id Methods'),
             'relative_error' => Yii::t('app', 'Relative Error'),
-            'id_users' => Yii::t('app', 'Id Users'),
             'id_measurements' => Yii::t('app', 'Id Measurements'),
             'conclusion' => Yii::t('app', 'Conclusion'),
         ];
@@ -123,6 +130,14 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getMeasurements()
+    {
+        return $this->hasOne(\app\models\Measurements::className(), ['id' => 'id_measurements']);
+    }
+        
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getMethods()
     {
         return $this->hasOne(\app\models\Methods::className(), ['id' => 'id_methods']);
@@ -134,14 +149,6 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
     public function getShelfLifes()
     {
         return $this->hasOne(\app\models\ShelfLifes::className(), ['id' => 'id_shelf_lifes']);
-    }
-        
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsers()
-    {
-        return $this->hasOne(\app\models\Users::className(), ['id' => 'id_users']);
     }
     
     /**

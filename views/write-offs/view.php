@@ -18,6 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <h2><?= Yii::t('app', 'Write Offs').' '. Html::encode($this->title) ?></h2>
         </div>
         <div class="col-sm-3" style="margin-top: 15px">
+<?=             
+             Html::a('<i class="fa glyphicon glyphicon-hand-up"></i> ' . Yii::t('app', 'PDF'), 
+                ['pdf', 'id' => $model->id],
+                [
+                    'class' => 'btn btn-danger',
+                    'target' => '_blank',
+                    'data-toggle' => 'tooltip',
+                    'title' => Yii::t('app', 'Will open the generated PDF file in a new window')
+                ]
+            )?>
             
             <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
             <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
@@ -34,13 +44,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'externalReagents.id',
             'label' => Yii::t('app', 'Id External Reagents'),
         ],
-        'id_internal_solutions',
-        'id_internal_solutions_two',
+        [
+            'attribute' => 'internalSolutions.id',
+            'label' => Yii::t('app', 'Id Internal Solutions'),
+        ],
+        [
+            'attribute' => 'internalSolutionsTwo.id',
+            'label' => Yii::t('app', 'Id Internal Solutions Two'),
+        ],
         'volume',
         'weight',
         'reason:ntext',
@@ -56,6 +74,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <?php 
     $gridColumnExternalReagents = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
         'id_manufacturers',
         'create_date',
@@ -74,18 +94,39 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => $gridColumnExternalReagents    ]);
     ?>
     <div class="row">
-        <h4>Users<?= ' '. Html::encode($this->title) ?></h4>
+        <h4>InternalSolutions<?= ' '. Html::encode($this->title) ?></h4>
     </div>
     <?php 
-    $gridColumnUsers = [
+    $gridColumnInternalSolutions = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
         ['attribute' => 'id', 'visible' => false],
-        'surname',
-        'name',
-        'patronymic',
-        'id_positions',
+        'create_date',
+        'best_before',
+        'volume',
+        'description',
+        'id_solutions',
     ];
     echo DetailView::widget([
-        'model' => $model->users,
-        'attributes' => $gridColumnUsers    ]);
+        'model' => $model->internalSolutions,
+        'attributes' => $gridColumnInternalSolutions    ]);
+    ?>
+    <div class="row">
+        <h4>InternalSolutions<?= ' '. Html::encode($this->title) ?></h4>
+    </div>
+    <?php 
+    $gridColumnInternalSolutions = [
+        'guid',
+        ['attribute' => 'lock', 'visible' => false],
+        ['attribute' => 'id', 'visible' => false],
+        'create_date',
+        'best_before',
+        'volume',
+        'description',
+        'id_solutions',
+    ];
+    echo DetailView::widget([
+        'model' => $model->internalSolutionsTwo,
+        'attributes' => $gridColumnInternalSolutions    ]);
     ?>
 </div>
