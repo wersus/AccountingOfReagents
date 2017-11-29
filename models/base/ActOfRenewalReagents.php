@@ -204,7 +204,6 @@ class ActOfRenewalReagents extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        $query = new \app\models\ActOfRenewalReagentsQuery(get_called_class());
-        return $query->where(['act_of_renewal_reagents.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

@@ -161,7 +161,6 @@ class Concentrations extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        $query = new \app\models\ConcentrationsQuery(get_called_class());
-        return $query->where(['concentrations.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

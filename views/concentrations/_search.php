@@ -14,16 +14,9 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
+    <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Name')]) ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
-
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'short_name')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'short_name')->textInput(['placeholder' => Yii::t('app', 'Short Name')]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

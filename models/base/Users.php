@@ -185,7 +185,6 @@ class Users extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        $query = new \app\models\UsersQuery(get_called_class());
-        return $query->where(['users.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

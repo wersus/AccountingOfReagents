@@ -44,9 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'name:ntext',
         'short_name:ntext',
     ];
@@ -58,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     
     <div class="row">
-<?php
+<?php /*
 if($providerSolutions->totalCount){
     $gridColumnSolutions = [
         ['class' => 'yii\grid\SerialColumn'],
@@ -81,7 +78,7 @@ if($providerSolutions->totalCount){
         ],
         'columns' => $gridColumnSolutions
     ]);
-}
+}*/
 ?>
 
     </div>

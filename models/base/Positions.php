@@ -149,7 +149,6 @@ class Positions extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        $query = new \app\models\PositionsQuery(get_called_class());
-        return $query->where(['positions.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

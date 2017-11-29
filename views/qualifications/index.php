@@ -31,9 +31,6 @@ $this->registerJs($search);
     <?php 
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'name:ntext',
         'short:ntext',
         [

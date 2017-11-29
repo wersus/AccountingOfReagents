@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Methods */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Methods',
-]) . ' ' . $model->name;
+    'modelClass' => Yii::t('app', 'Method'),
+]) . ' ' . $model->short;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Methods'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');

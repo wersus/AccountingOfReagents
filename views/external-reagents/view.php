@@ -44,9 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'manufacturers.name',
             'label' => Yii::t('app', 'Id Manufacturers'),
@@ -60,16 +57,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'best_before',
         'batch',
         'weight',
-        'volume',
         [
             'attribute' => 'qualifications.name',
             'label' => Yii::t('app', 'Id Qualifications'),
         ],
-        'description:ntext',
         [
             'attribute' => 'shelfLifes.id',
             'label' => Yii::t('app', 'Id Shelf Lifes'),
         ],
+        'description:ntext',
+
     ];
     echo DetailView::widget([
         'model' => $model,
@@ -79,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     
     <div class="row">
-<?php
+<?php /*
 if($providerActOfRenewalReagents->totalCount){
     $gridColumnActOfRenewalReagents = [
         ['class' => 'yii\grid\SerialColumn'],
@@ -210,7 +207,7 @@ if($providerWriteOffs->totalCount){
         ],
         'columns' => $gridColumnWriteOffs
     ]);
-}
+} */
 ?>
 
     </div>

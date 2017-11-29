@@ -6,23 +6,23 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\models\ExternalReagents */
 /* @var $form yii\widgets\ActiveForm */
-
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+/*
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
-        'class' => 'ActOfRenewalReagents', 
-        'relID' => 'act-of-renewal-reagents', 
+        'class' => 'ActOfRenewalReagents',
+        'relID' => 'act-of-renewal-reagents',
         'value' => \yii\helpers\Json::encode($model->actOfRenewalReagents),
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
 ]);
-\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos'=> \yii\web\View::POS_END, 
+\mootensai\components\JsBlock::widget(['viewFile' => '_script', 'pos' => \yii\web\View::POS_END,
     'viewParams' => [
-        'class' => 'WriteOffs', 
-        'relID' => 'write-offs', 
+        'class' => 'WriteOffs',
+        'relID' => 'write-offs',
         'value' => \yii\helpers\Json::encode($model->writeOffs),
         'isNewRecord' => ($model->isNewRecord) ? 1 : 0
     ]
-]);
+]); */
 ?>
 
 <div class="external-reagents-form">
@@ -31,63 +31,53 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
-
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+    <?= $form->field($model, 'id_reagents')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Reagents::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose {model}', ['model' => Yii::t('app', 'Reagent')])],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'id_manufacturers')->widget(\kartik\widgets\Select2::classname(), [
         'data' => \yii\helpers\ArrayHelper::map(\app\models\Manufacturers::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Manufacturers')],
+        'options' => ['placeholder' => Yii::t('app', 'Choose {model}', ['model' => Yii::t('app', 'Manufacturer')])],
         'pluginOptions' => [
             'allowClear' => true
         ],
     ]); ?>
-
-    <?= $form->field($model, 'create_date')->widget(\kartik\datecontrol\DateControl::classname(), [
-        'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
-        'saveFormat' => 'php:Y-m-d',
-        'ajaxConversion' => true,
-        'options' => [
-            'pluginOptions' => [
-                'placeholder' => Yii::t('app', 'Choose Create Date'),
-                'autoclose' => true
-            ]
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'id_reagents')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\Reagents::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Reagents')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'document')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'best_before')->widget(\kartik\datecontrol\DateControl::classname(), [
-        'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
-        'saveFormat' => 'php:Y-m-d',
-        'ajaxConversion' => true,
-        'options' => [
-            'pluginOptions' => [
-                'placeholder' => Yii::t('app', 'Choose Best Before'),
-                'autoclose' => true
-            ]
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'batch')->textInput(['placeholder' => 'Batch']) ?>
-
-    <?= $form->field($model, 'weight')->textInput(['placeholder' => 'Weight']) ?>
-
-    <?= $form->field($model, 'volume')->textInput(['placeholder' => 'Volume']) ?>
 
     <?= $form->field($model, 'id_qualifications')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\Qualifications::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Qualifications')],
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\Qualifications::find()->orderBy('id')->asArray()->all(), 'id', 'short'),
+        'options' => ['placeholder' => Yii::t('app', 'Choose {model}', ['model' => Yii::t('app', 'Qualification')])],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]); ?>
+
+    <?= $form->field($model, 'document')->textInput(['placeholder' => Yii::t('app', 'Document')]) ?>
+
+    <?= $model->isNewRecord ?'':$form->field($model, 'create_date')->widget(\kartik\datecontrol\DateControl::classname(), [
+        'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
+        'saveFormat' => 'php:Y-m-d',
+        'ajaxConversion' => true,
+        'options' => [
+            'pluginOptions' => [
+                'placeholder' => Yii::t('app', 'Choose {model}', ['model' => Yii::t('app', 'Create Date')]),
+                'autoclose' => true
+            ]
+        ],
+    ]); ?>
+
+    <?= $form->field($model, 'batch')->textInput(['placeholder' => Yii::t('app', 'Batch')]) ?>
+
+    <?= $form->field($model, 'weight')->textInput(['placeholder' => Yii::t('app', 'Weight')]) ?>
+
+    <?= $form->field($model, 'id_shelf_lifes')->widget(\kartik\widgets\Select2::classname(), [
+        'data' => \yii\helpers\ArrayHelper::map(\app\models\ShelfLifes::find()->orderBy('id')->asArray()->all(), 'id', 'short'),
+        'options' => [
+            'placeholder' => Yii::t('app', 'Choose {model}', ['model' => Yii::t('app', 'Shelf Life')]),
+        ],
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -95,15 +85,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'id_shelf_lifes')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\ShelfLifes::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
-        'options' => ['placeholder' => Yii::t('app', 'Choose Shelf lifes')],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
-
-    <?php
+    <?php /*
     $forms = [
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'ActOfRenewalReagents')),
@@ -127,11 +109,11 @@ use yii\widgets\ActiveForm;
             'sideways' => true,
             'enableCache' => false,
         ],
-    ]);
+    ]); */
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer , ['class'=> 'btn btn-danger']) ?>
+        <?= Html::a(Yii::t('app', 'Cancel'), Yii::$app->request->referrer, ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

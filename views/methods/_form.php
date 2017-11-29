@@ -31,22 +31,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+    <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Name')]) ?>
 
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+    <?= $form->field($model, 'short')->textInput(['placeholder' => Yii::t('app', 'Short')]) ?>
 
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+    <?= $form->field($model, 'document')->textInput(['placeholder' => Yii::t('app', 'Document')]) ?>
 
-    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'short')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'document')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'index')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'index')->textInput(['placeholder' => Yii::t('app', 'Index')]) ?>
 
     <?php
-    $forms = [
+    /*$forms = [
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'ActOfRenewalReagents')),
             'content' => $this->render('_formActOfRenewalReagents', [
@@ -69,7 +63,7 @@ use yii\widgets\ActiveForm;
             'sideways' => true,
             'enableCache' => false,
         ],
-    ]);
+    ]);*/
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -24,8 +24,8 @@ use mootensai\behaviors\UUIDBehavior;
  * @property string $document
  * @property string $best_before
  * @property integer $batch
- * @property integer $weight
- * @property integer $volume
+ * @property float $weight
+ * @property float $volume
  * @property integer $id_qualifications
  * @property string $description
  * @property integer $id_shelf_lifes
@@ -79,10 +79,11 @@ class ExternalReagents extends \yii\db\ActiveRecord
     {
         return [
             [['guid', 'document', 'description'], 'string'],
-            [['deleted_by', 'updated_by', 'lock', 'id_manufacturers', 'id_reagents', 'batch', 'weight', 'volume', 'id_qualifications', 'id_shelf_lifes'], 'integer'],
+            [['weight', 'volume'], 'double'],
+            [['deleted_by', 'updated_by', 'lock', 'id_manufacturers', 'id_reagents', 'batch', 'id_qualifications', 'id_shelf_lifes'], 'integer'],
             [['created_at', 'updated_at', 'deleted_at', 'create_date', 'best_before'], 'safe'],
-            [['lock'], 'default', 'value' => '0'],
-            [['lock'], 'mootensai\components\OptimisticLockValidator']
+            //[['lock'], 'default', 'value' => '0'],
+            //[['lock'], 'mootensai\components\OptimisticLockValidator'],
         ];
     }
 
@@ -225,11 +226,10 @@ class ExternalReagents extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\models\ExternalReagentsQuery the active query used by this AR class.
+     * return \app\models\ExternalReagentsQuery the active query used by this AR class.
      */
     public static function find()
     {
-        $query = new \app\models\ExternalReagentsQuery(get_called_class());
-        return $query->where(['external_reagents.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

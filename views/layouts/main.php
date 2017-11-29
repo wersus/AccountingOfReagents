@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -38,16 +39,35 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => Yii::t('app', 'Reagents'),
+                'url' => ['/reagents'],
+                'items' => [
+                        ['label' => Yii::t('app', 'Reagents'), 'url' => ['/reagents']],
+                        ['label' => Yii::t('app', 'Act Of Renewal Reagents'), 'url' => ['/act-of-renewal-reagents']],
+                        ['label' => Yii::t('app', 'Concentrations'), 'url' => ['/concentrations']],
+                        ['label' => Yii::t('app', 'External Reagents'), 'url' => ['/external-reagents']],
+                        ['label' => Yii::t('app', 'Internal Solutions'), 'url' => ['/internal-solutions']],
+                        ['label' => Yii::t('app', 'Methods'), 'url' => ['/methods']],
+                        ['label' => Yii::t('app', 'Qualifications'), 'url' => ['/qualifications']],
+                        ['label' => Yii::t('app', 'Manufacturers'), 'url' => ['/manufacturers']],
+                        ['label' => Yii::t('app', 'Measurements'), 'url' => ['/measurements']],
+                        ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
+                        ['label' => Yii::t('app', 'Solutions'), 'url' => ['/solutions']],
+                        ['label' => Yii::t('app', 'Write Offs'), 'url' => ['/write-offs']],
+                        ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
+                        ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
+                ]
+            ],
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
+            ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    Yii::t('app', 'Logout') . ' (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -69,7 +89,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; NO Company <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

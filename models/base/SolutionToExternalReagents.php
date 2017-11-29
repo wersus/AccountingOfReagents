@@ -198,7 +198,6 @@ class SolutionToExternalReagents extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        $query = new \app\models\SolutionToExternalReagentsQuery(get_called_class());
-        return $query->where(['solution_to_external_reagents.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

@@ -18,7 +18,8 @@ class ExternalReagents extends BaseExternalReagents
         return array_replace_recursive(parent::rules(),
 	    [
             [['guid', 'document', 'description'], 'string'],
-            [['deleted_by', 'updated_by', 'lock', 'id_manufacturers', 'id_reagents', 'batch', 'weight', 'volume', 'id_qualifications', 'id_shelf_lifes'], 'integer'],
+            [['weight', 'volume'], 'double'],
+            [['deleted_by', 'updated_by', 'lock', 'id_manufacturers', 'id_reagents', 'batch', 'id_qualifications', 'id_shelf_lifes'], 'integer'],
             [['created_at', 'updated_at', 'deleted_at', 'create_date', 'best_before'], 'safe'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']

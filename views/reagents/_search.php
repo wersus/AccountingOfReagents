@@ -15,15 +15,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+    <?= $form->field($model, 'name')->textInput() ?>
 
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'formula')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'formula')->textInput() ?>
 
     <?php /* echo $form->field($model, 'short')->textarea(['rows' => 6]) */ ?>
 

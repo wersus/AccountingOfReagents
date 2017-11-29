@@ -146,11 +146,10 @@ class Manufacturers extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\models\ManufacturersQuery the active query used by this AR class.
+     * return \app\models\ManufacturersQuery the active query used by this AR class.
      */
     public static function find()
     {
-        $query = new \app\models\ManufacturersQuery(get_called_class());
-        return $query->where(['manufacturers.deleted_by' => 0]);
+        return parent::find()->where(['deleted_by' => null])->orWhere(['deleted_by' => 0]);
     }
 }

@@ -31,26 +31,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+    <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Name')]) ?>
 
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+    <?= $form->field($model, 'formula')->textInput(['placeholder' => Yii::t('app', 'Formula')]) ?>
 
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'formula')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'short')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'short')->textInput(['placeholder' => Yii::t('app', 'Short')]) ?>
 
     <?= $form->field($model, 'liquid')->checkbox() ?>
 
-    <?= $form->field($model, 'density')->textInput(['placeholder' => 'Density']) ?>
+    <?= $form->field($model, 'density')->textInput(['placeholder' => Yii::t('app', 'Density')]) ?>
 
-    <?= $form->field($model, 'short_formula')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'short_formula')->textInput(['placeholder' => Yii::t('app', 'Short Formula')]) ?>
 
     <?php
-    $forms = [
+    /*$forms = [
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'ExternalReagents')),
             'content' => $this->render('_formExternalReagents', [
@@ -73,7 +67,7 @@ use yii\widgets\ActiveForm;
             'sideways' => true,
             'enableCache' => false,
         ],
-    ]);
+    ]);*/
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -23,17 +23,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
+    <?= $form->field($model, 'name')->textInput(['placeholder' => Yii::t('app', 'Name')]) ?>
 
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
+    <?= $form->field($model, 'short_name')->textInput(['placeholder' => Yii::t('app', 'Short Name')]) ?>
 
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'short_name')->textarea(['rows' => 6]) ?>
-
-    <?php
+    <?php /*
     $forms = [
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'Solutions')),
@@ -51,7 +45,7 @@ use yii\widgets\ActiveForm;
             'sideways' => true,
             'enableCache' => false,
         ],
-    ]);
+    ]);*/
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

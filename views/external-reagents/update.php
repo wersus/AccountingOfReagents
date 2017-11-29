@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\ExternalReagents */
 
 $this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'External Reagents',
+    'modelClass' => Yii::t('app', 'External Reagents'),
 ]) . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'External Reagents'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];

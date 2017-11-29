@@ -44,9 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'value',
         'short:ntext',
     ];
