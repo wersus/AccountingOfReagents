@@ -65,9 +65,9 @@ use app\models\Measurements;
             'deleted_at' => $this->deleted_at,
             'id' => $this->id,
             'date' => $this->date,
-            'mass_consentarion' => $this->mass_consentarion,
+            'mass_concentration' => $this->mass_concentration,
             'Kk' => $this->Kk,
-            'control standard' => $this->control standard,
+            'control_standard' => $this->control_standard,
         ]);
 
         $query->andFilterWhere(['like', 'guid', $this->guid]);

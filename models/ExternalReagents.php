@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use \app\models\base\ExternalReagents as BaseExternalReagents;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "external_reagents".
@@ -24,6 +26,11 @@ class ExternalReagents extends BaseExternalReagents
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);
+    }
+
+    public function getName()
+    {
+        return ArrayHelper::getValue($this, 'reagents.name').", ". ArrayHelper::getValue($this, 'qualifications.short');
     }
 	
 }

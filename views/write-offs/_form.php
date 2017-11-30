@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use \yii\helpers\ArrayHelper;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\WriteOffs */
@@ -15,14 +17,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
-
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
     <?= $form->field($model, 'id_external_reagents')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\ExternalReagents::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'data' => ArrayHelper::map(\app\models\ExternalReagents::find()->orderBy('id')->all(), 'id', 'name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose External reagents')],
         'pluginOptions' => [
             'allowClear' => true
@@ -30,7 +26,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'id_internal_solutions')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'data' => ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Internal solutions')],
         'pluginOptions' => [
             'allowClear' => true
@@ -38,7 +34,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'id_internal_solutions_two')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'id'),
+        'data' => ArrayHelper::map(\app\models\InternalSolutions::find()->orderBy('id')->asArray()->all(), 'id', 'name'),
         'options' => ['placeholder' => Yii::t('app', 'Choose Internal solutions')],
         'pluginOptions' => [
             'allowClear' => true

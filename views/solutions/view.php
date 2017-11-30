@@ -44,16 +44,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
-            'attribute' => 'shelfLifes.id',
+            'attribute' => 'shelfLifes.short',
             'label' => Yii::t('app', 'Id Shelf Lifes'),
         ],
         'name:ntext',
         [
-            'attribute' => 'concentrations.name',
+            'attribute' => 'concentrations.short_name',
             'label' => Yii::t('app', 'Id Concentrations'),
         ],
     ];
@@ -65,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     
     <div class="row">
-<?php
+<?php /*
 if($providerInternalSolutions->totalCount){
     $gridColumnInternalSolutions = [
         ['class' => 'yii\grid\SerialColumn'],
@@ -152,6 +149,6 @@ if($providerSolutionToExternalReagents->totalCount){
     ];
     echo DetailView::widget([
         'model' => $model->shelfLifes,
-        'attributes' => $gridColumnShelfLifes    ]);
+        'attributes' => $gridColumnShelfLifes    ]); */
     ?>
 </div>

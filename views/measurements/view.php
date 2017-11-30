@@ -44,13 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'date',
-        'mass_consentarion',
+        'mass_concentration',
         'Kk',
-        'control standard',
+        'control_standard',
     ];
     echo DetailView::widget([
         'model' => $model,

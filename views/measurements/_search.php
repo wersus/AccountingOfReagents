@@ -33,11 +33,11 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'mass_consentarion')->textInput(['placeholder' => 'Mass Consentarion']) ?>
+    <?= $form->field($model, 'mass_concentration')->textInput(['placeholder' => 'Mass Concentration']) ?>
 
     <?php /* echo $form->field($model, 'Kk')->textInput(['placeholder' => 'Kk']) */ ?>
 
-    <?php /* echo $form->field($model, 'control standard')->textInput(['placeholder' => 'Control Standard']) */ ?>
+    <?php /* echo $form->field($model, 'control_standard')->textInput(['placeholder' => 'Control Standard']) */ ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

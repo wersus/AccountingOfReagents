@@ -19,16 +19,13 @@ use kartik\grid\GridView;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
-            'attribute' => 'shelfLifes.id',
+            'attribute' => 'shelfLifes.short',
             'label' => Yii::t('app', 'Id Shelf Lifes'),
         ],
         'name:ntext',
         [
-            'attribute' => 'concentrations.name',
+            'attribute' => 'concentrations.short_name',
             'label' => Yii::t('app', 'Id Concentrations'),
         ],
     ];

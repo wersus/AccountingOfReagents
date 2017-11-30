@@ -20,7 +20,7 @@ class Measurements extends BaseMeasurements
             [['guid'], 'string'],
             [['deleted_by', 'updated_by', 'lock'], 'integer'],
             [['created_at', 'updated_at', 'deleted_at', 'date'], 'safe'],
-            [['mass_consentarion', 'Kk', 'control standard'], 'number'],
+            [['mass_consentarion', 'Kk', 'control_standard'], 'number'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ]);

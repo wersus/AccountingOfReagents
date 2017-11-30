@@ -23,12 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'guid')->textInput(['placeholder' => 'Guid']) ?>
-
-    <?= $form->field($model, 'lock', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
     <?= $form->field($model, 'date')->widget(\kartik\datecontrol\DateControl::classname(), [
         'type' => \kartik\datecontrol\DateControl::FORMAT_DATE,
         'saveFormat' => 'php:Y-m-d',
@@ -41,13 +35,13 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'mass_consentarion')->textInput(['placeholder' => 'Mass Consentarion']) ?>
+    <?= $form->field($model, 'mass_concentration')->textInput(['placeholder' => 'Mass Concentration']) ?>
 
     <?= $form->field($model, 'Kk')->textInput(['placeholder' => 'Kk']) ?>
 
-    <?= $form->field($model, 'control standard')->textInput(['placeholder' => 'Control Standard']) ?>
+    <?= $form->field($model, 'control_standard')->textInput(['placeholder' => 'Control Standard']) ?>
 
-    <?php
+    <?php /*
     $forms = [
         [
             'label' => '<i class="glyphicon glyphicon-book"></i> ' . Html::encode(Yii::t('app', 'ActOfRenewalReagents')),
@@ -65,7 +59,7 @@ use yii\widgets\ActiveForm;
             'sideways' => true,
             'enableCache' => false,
         ],
-    ]);
+    ]); */
     ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

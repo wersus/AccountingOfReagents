@@ -43,6 +43,7 @@ $this->registerJs($search);
             'headerOptions' => ['class' => 'kartik-sheet-style'],
             'expandOneOnly' => true
         ],
+        'name',
         [
                 'attribute' => 'id_manufacturers',
                 'label' => Yii::t('app', 'Id Manufacturers'),

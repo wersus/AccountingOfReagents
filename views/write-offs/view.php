@@ -44,9 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'externalReagents.id',
             'label' => Yii::t('app', 'Id External Reagents'),
@@ -72,11 +69,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <h4>ExternalReagents<?= ' '. Html::encode($this->title) ?></h4>
     </div>
-    <?php 
+    <?php
     $gridColumnExternalReagents = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'id_manufacturers',
         'create_date',
         'id_reagents',

@@ -39,23 +39,30 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::t('app', 'Reagents'),
-                'url' => ['/reagents'],
+            ['label' => Yii::t('app', 'References'),
                 'items' => [
-                        ['label' => Yii::t('app', 'Reagents'), 'url' => ['/reagents']],
-                        ['label' => Yii::t('app', 'Act Of Renewal Reagents'), 'url' => ['/act-of-renewal-reagents']],
-                        ['label' => Yii::t('app', 'Concentrations'), 'url' => ['/concentrations']],
-                        ['label' => Yii::t('app', 'External Reagents'), 'url' => ['/external-reagents']],
-                        ['label' => Yii::t('app', 'Internal Solutions'), 'url' => ['/internal-solutions']],
-                        ['label' => Yii::t('app', 'Methods'), 'url' => ['/methods']],
-                        ['label' => Yii::t('app', 'Qualifications'), 'url' => ['/qualifications']],
-                        ['label' => Yii::t('app', 'Manufacturers'), 'url' => ['/manufacturers']],
-                        ['label' => Yii::t('app', 'Measurements'), 'url' => ['/measurements']],
-                        ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
-                        ['label' => Yii::t('app', 'Solutions'), 'url' => ['/solutions']],
-                        ['label' => Yii::t('app', 'Write Offs'), 'url' => ['/write-offs']],
-                        ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
-                        ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
+                    ['label' => Yii::t('app', 'Reagents'), 'url' => ['/reagents']],
+                    ['label' => Yii::t('app', 'Concentrations'), 'url' => ['/concentrations']], ['label' => Yii::t('app', 'Methods'), 'url' => ['/methods']],
+                    ['label' => Yii::t('app', 'Qualifications'), 'url' => ['/qualifications']],
+                    ['label' => Yii::t('app', 'Manufacturers'), 'url' => ['/manufacturers']],
+                    ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
+                    ['label' => Yii::t('app', 'Solutions'), 'url' => ['/solutions']],
+                    ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
+                    ['label' => Yii::t('app', 'Solution To External Reagents'), 'url' => ['/solution-to-external-reagents']],
+                ]
+            ],
+            ['label' => Yii::t('app', 'Reagents'),
+                'items' => [
+                    [
+                        'label' => Yii::t('app', 'Act Of Renewal Reagents'),
+                        'items' => [
+                            ['label' => Yii::t('app', 'Act Of Renewal Reagents'), 'url' => ['/act-of-renewal-reagents']],
+                            ['label' => Yii::t('app', 'Measurements'), 'url' => ['/measurements']],
+                        ],
+                    ],
+                    ['label' => Yii::t('app', 'Write Offs'), 'url' => ['/write-offs']],
+                    ['label' => Yii::t('app', 'External Reagents'), 'url' => ['/external-reagents']],
+                    ['label' => Yii::t('app', 'Internal Solutions'), 'url' => ['/internal-solutions']],
                 ]
             ],
             ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],

@@ -86,5 +86,25 @@ return [
     'Id Qualifications' => 'Квалификция',
     'Choose {model}' => 'Выберите {model}',
     'Create {model}' => 'Создать {model}',
+
+
+    'Mass Concentration' => 'Массовая концентрация',
+    'Control Standard' => 'Норматив контроля',
+    'Create Measurements' => 'Создать Измерение',
+    'Measurements' => 'Измерения',
+    'Kk' => 'Результат контрольной процедуры',
+
+    'Write Offs' => 'Списания',
+    'Create Write Offs' => 'Создать списание',
+    'Reason' => 'Причина',
+    'Id Internal Solutions' => 'Раствор',
+    'Id Internal Solutions Two' => 'Раствор',
+    'Choose Internal solutions' => 'Выберите раствор',
+
+    'Solutions' => 'Растворы',
+    'Create Solutions' => 'Создать растворы',
+    'Id Concentrations' => 'Концентрация',
+    'Choose Shelf lifes' => 'Выберите срок хранения',
+    'Choose Concentrations' => 'Выберите концентрацию',
     '' => '',
 ];

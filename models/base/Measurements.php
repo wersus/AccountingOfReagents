@@ -19,11 +19,13 @@ use mootensai\behaviors\UUIDBehavior;
  * @property string $deleted_at
  * @property integer $id
  * @property string $date
- * @property double $mass_consentarion
+ * @property double $mass_concentration
  * @property double $Kk
- * @property double $control standard
+ * @property double $control_standard
  *
  * @property \app\models\ActOfRenewalReagents[] $actOfRenewalReagents
+ *
+ * @todo do not save mass_concentration :S and date
  */
 class Measurements extends \yii\db\ActiveRecord
 {
@@ -64,7 +66,7 @@ class Measurements extends \yii\db\ActiveRecord
             [['guid'], 'string'],
             [['deleted_by', 'updated_by', 'lock'], 'integer'],
             [['created_at', 'updated_at', 'deleted_at', 'date'], 'safe'],
-            [['mass_consentarion', 'Kk', 'control standard'], 'number'],
+            [['mass_concentration', 'Kk', 'control_standard'], 'number'],
             [['lock'], 'default', 'value' => '0'],
             [['lock'], 'mootensai\components\OptimisticLockValidator']
         ];
@@ -99,9 +101,9 @@ class Measurements extends \yii\db\ActiveRecord
             'lock' => Yii::t('app', 'Lock'),
             'id' => Yii::t('app', 'ID'),
             'date' => Yii::t('app', 'Date'),
-            'mass_consentarion' => Yii::t('app', 'Mass Consentarion'),
+            'mass_concentration' => Yii::t('app', 'Mass Concentration'),
             'Kk' => Yii::t('app', 'Kk'),
-            'control standard' => Yii::t('app', 'Control Standard'),
+            'control_standard' => Yii::t('app', 'Control Standard'),
         ];
     }
     
@@ -162,7 +164,7 @@ class Measurements extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return \app\models\MeasurementsQuery the active query used by this AR class.
+     * return \app\models\MeasurementsQuery the active query used by this AR class.
      */
     public static function find()
     {
