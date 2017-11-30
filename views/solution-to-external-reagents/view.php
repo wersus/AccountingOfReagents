@@ -44,9 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
             'attribute' => 'solutions.name',
             'label' => Yii::t('app', 'Id Solutions'),
@@ -71,72 +68,4 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
 ?>
     </div>
-    <div class="row">
-        <h4>Methods<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnMethods = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
-        'name',
-        'short',
-        'document',
-        'index',
-    ];
-    echo DetailView::widget([
-        'model' => $model->methods,
-        'attributes' => $gridColumnMethods    ]);
-    ?>
-    <div class="row">
-        <h4>Reagents<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnReagents = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
-        'name',
-        'formula',
-        'short',
-        'liquid',
-        'density',
-        'short_formula',
-    ];
-    echo DetailView::widget([
-        'model' => $model->reagents,
-        'attributes' => $gridColumnReagents    ]);
-    ?>
-    <div class="row">
-        <h4>Solutions<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnSolutions = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
-        'id_shelf_lifes',
-        'name',
-        'id_concentrations',
-    ];
-    echo DetailView::widget([
-        'model' => $model->solutions,
-        'attributes' => $gridColumnSolutions    ]);
-    ?>
-    <div class="row">
-        <h4>Solutions<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnSolutions = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
-        'id_shelf_lifes',
-        'name',
-        'id_concentrations',
-    ];
-    echo DetailView::widget([
-        'model' => $model->solutionsTwo,
-        'attributes' => $gridColumnSolutions    ]);
-    ?>
 </div>

@@ -43,9 +43,6 @@ $this->registerJs($search);
             'headerOptions' => ['class' => 'kartik-sheet-style'],
             'expandOneOnly' => true
         ],
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
                 'attribute' => 'id_solutions',
                 'label' => Yii::t('app', 'Id Solutions'),

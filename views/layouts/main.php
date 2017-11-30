@@ -47,7 +47,6 @@ AppAsset::register($this);
                     ['label' => Yii::t('app', 'Manufacturers'), 'url' => ['/manufacturers']],
                     ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
                     ['label' => Yii::t('app', 'Solutions'), 'url' => ['/solutions']],
-                    ['label' => Yii::t('app', 'Shelf Lifes'), 'url' => ['/shelf-lifes']],
                     ['label' => Yii::t('app', 'Solution To External Reagents'), 'url' => ['/solution-to-external-reagents']],
                 ]
             ],
