@@ -107,10 +107,15 @@ return [
     'Choose Shelf lifes' => 'Выберите срок хранения',
     'Choose Concentrations' => 'Выберите концентрацию',
     'References' => 'Справочники',
-    'Solution To External Reagents' => 'Состав расстворов',
+    'Solution To External Reagents' => 'Состав растворов',
     'Create Solution To External Reagents' => 'Создать Состав расстворов',
     'Part' => 'Часть',
     'Id Solutions' => 'Раствор',
     'Id Solutions Two' => 'Раствор',
+
+    'Create Internal Solutions' => 'Создать раствор',
+    'Internal Solutions' => 'Растворы',
+    '' => '',
+    '' => '',
     '' => '',
 ];

@@ -44,9 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
 <?php 
     $gridColumn = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         'create_date',
         'best_before',
         'volume',
@@ -61,52 +58,5 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => $gridColumn
     ]);
 ?>
-    </div>
-    <div class="row">
-        <h4>Solutions<?= ' '. Html::encode($this->title) ?></h4>
-    </div>
-    <?php 
-    $gridColumnSolutions = [
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
-        'id_shelf_lifes',
-        'name',
-        'id_concentrations',
-    ];
-    echo DetailView::widget([
-        'model' => $model->solutions,
-        'attributes' => $gridColumnSolutions    ]);
-    ?>
-    
-    <div class="row">
-<?php
-if($providerWriteOffs->totalCount){
-    $gridColumnWriteOffs = [
-        ['class' => 'yii\grid\SerialColumn'],
-            'guid',
-            ['attribute' => 'lock', 'visible' => false],
-            ['attribute' => 'id', 'visible' => false],
-            [
-                'attribute' => 'externalReagents.id',
-                'label' => Yii::t('app', 'Id External Reagents')
-            ],
-                                    'volume',
-            'weight',
-            'reason:ntext',
-    ];
-    echo Gridview::widget([
-        'dataProvider' => $providerWriteOffs,
-        'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-write-offs']],
-        'panel' => [
-            'type' => GridView::TYPE_PRIMARY,
-            'heading' => '<span class="glyphicon glyphicon-book"></span> ' . Html::encode(Yii::t('app', 'Write Offs')),
-        ],
-        'columns' => $gridColumnWriteOffs
-    ]);
-}
-?>
-
     </div>
 </div>
