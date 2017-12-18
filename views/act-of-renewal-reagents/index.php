@@ -43,9 +43,6 @@ $this->registerJs($search);
             'headerOptions' => ['class' => 'kartik-sheet-style'],
             'expandOneOnly' => true
         ],
-        'guid',
-        ['attribute' => 'lock', 'visible' => false],
-        ['attribute' => 'id', 'visible' => false],
         [
                 'attribute' => 'id_external_reagents',
                 'label' => Yii::t('app', 'Id External Reagents'),
@@ -56,11 +53,11 @@ $this->registerJs($search);
                     {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\ExternalReagents::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\ExternalReagents::find()->asArray()->all(), 'id', 'name'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'External reagents', 'id' => 'grid-act-of-renewal-reagents-search-id_external_reagents']
+                'filterInputOptions' => ['placeholder' => Yii::t('app','External Reagents'), 'id' => 'grid-act-of-renewal-reagents-search-id_external_reagents']
             ],
         'best_before',
         'date',
@@ -74,11 +71,11 @@ $this->registerJs($search);
                     {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\ShelfLifes::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\ShelfLifes::find()->asArray()->all(), 'id', 'short'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Shelf lifes', 'id' => 'grid-act-of-renewal-reagents-search-id_shelf_lifes']
+                'filterInputOptions' => ['placeholder' => Yii::t('app','Shelf Lifes'), 'id' => 'grid-act-of-renewal-reagents-search-id_shelf_lifes']
             ],
         [
                 'attribute' => 'id_methods',
@@ -91,12 +88,12 @@ $this->registerJs($search);
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
-                'filterInputOptions' => ['placeholder' => 'Methods', 'id' => 'grid-act-of-renewal-reagents-search-id_methods']
+                'filterInputOptions' => ['placeholder' => Yii::t('app','Methods'), 'id' => 'grid-act-of-renewal-reagents-search-id_methods']
             ],
         'relative_error',
         [
                 'attribute' => 'id_measurements',
-                'label' => Yii::t('app', 'Id Measurements'),
+                'label' => Yii::t('app', 'Measurements'),
                 'value' => function($model){
                     if ($model->measurements)
                     {return $model->measurements->id;}
@@ -104,7 +101,7 @@ $this->registerJs($search);
                     {return NULL;}
                 },
                 'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Measurements::find()->asArray()->all(), 'id', 'id'),
+                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Measurements::find()->asArray()->all(), 'id', 'name'),
                 'filterWidgetOptions' => [
                     'pluginOptions' => ['allowClear' => true],
                 ],
