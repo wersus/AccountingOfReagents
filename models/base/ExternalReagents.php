@@ -6,6 +6,8 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use mootensai\behaviors\UUIDBehavior;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the base model class for table "external_reagents".
@@ -128,7 +130,16 @@ class ExternalReagents extends \yii\db\ActiveRecord
             'id_shelf_lifes' => Yii::t('app', 'Id Shelf Lifes'),
         ];
     }
-    
+    public function beforeSave($insert)
+    {
+        if($create_date = Html::value($this, 'create_date')){
+            $date = new \DateTime($create_date);
+            $date->modify('+'.Html::value($this, 'shelfLifes.value', 0).' months');
+            $this->best_before = $date->format('c');
+        }
+        return parent::beforeSave($insert);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -3,6 +3,8 @@
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
+use kartik\datecontrol\Module;
+
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
@@ -72,6 +74,11 @@ $config = [
         ],
         'datecontrol' => [
             'class' => '\kartik\datecontrol\Module',
+            'displaySettings' => [
+                Module::FORMAT_DATE => 'dd-MM-yyyy',
+                Module::FORMAT_TIME => 'HH:mm:ss',
+                Module::FORMAT_DATETIME => 'dd-MM-yyyy HH:mm:ss',
+            ],
         ],]
 ];
 
