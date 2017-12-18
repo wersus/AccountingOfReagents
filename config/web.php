@@ -7,6 +7,7 @@ use kartik\datecontrol\Module;
 
 $config = [
     'id' => 'basic',
+    'name'=> 'Учёт рекативов',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [

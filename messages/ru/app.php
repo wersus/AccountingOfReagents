@@ -1,5 +1,6 @@
 <?php
 return [
+    'App name' => 'Учёт реактивов',
     'Create' => 'Создать',
     'Cancel' => 'Отмена',
     'Update' => 'Обновить',

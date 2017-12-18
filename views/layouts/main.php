@@ -64,9 +64,6 @@ AppAsset::register($this);
                     ['label' => Yii::t('app', 'Internal Solutions'), 'url' => ['/internal-solutions']],
                 ]
             ],
-            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
-            ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
-            ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
             ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']]
             ) : (
@@ -95,7 +92,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; NO Company <?= date('Y') ?></p>
+        <p class="pull-left"><?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
